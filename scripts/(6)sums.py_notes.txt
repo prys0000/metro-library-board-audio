@@ -1,0 +1,55 @@
+---
+
+## **(6)sums.py**
+
+📝 **Extracts text from PDF meeting minutes and generates structured AI summaries**
+
+**What it does**
+This script automates the process of reading a folder of **PDF meeting minutes** (such as board or committee meetings), extracting text using [PyMuPDF](https://pymupdf.readthedocs.io/en/latest/), and sending the content to the OpenAI API to create **structured, historian-grade summaries**.
+The output is saved to a CSV file for easy reference, reporting, or importing into archival databases.
+
+**Key features**
+
+* **Smart PDF matching** — Groups PDFs by meeting date, prioritizing `_ocr` versions when available.
+* **Text extraction & cleanup** — Uses PyMuPDF to pull text, remove artifacts, and fix common OCR mistakes.
+* **Structured summaries** — Generates **Synopsis**, **Summary**, and **Key Notes** sections tailored for historical/archival work.
+* **Token-aware processing** — Truncates or shortens text to avoid API context limit errors.
+* **Resilient API handling** — Falls back to shorter summaries if token limits are exceeded.
+* **Detailed logging** — Shows progress, warnings, and processing statistics.
+* **CSV export** — Saves all summaries with meeting date, file name, and extracted sections.
+
+**Why it’s important**
+Large collections of meeting minutes are often **unsearchable and hard to browse**. This tool transforms them into **searchable, concise summaries** for rapid review and archival metadata creation.
+
+**Dependencies**
+
+```bash
+pip install pymupdf python-dotenv openai
+```
+
+Also requires an **OpenAI API key** stored in a `.env` file:
+
+```
+OPENAI_API_KEY=your_api_key_here
+```
+
+**Usage**
+
+```bash
+python meeting_minutes_summarizer.py
+```
+
+Inside the script, configure:
+
+```python
+input_folder = Path("/path/to/ocr_pdfs")
+output_file  = Path("/path/to/output/meeting_summaries.csv")
+```
+
+**Example output CSV**
+
+| Date       | PDF\_File                        | Synopsis                          | Summary | Key Notes |
+| ---------- | -------------------------------- | --------------------------------- | ------- | --------- |
+| 1970-01-05 | 1970-01-05\_meeting\_minutes.pdf | Overview of desegregation plan... | ...     | ...       |
+
+---
