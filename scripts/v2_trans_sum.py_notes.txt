@@ -1,0 +1,39 @@
+
+---
+
+## **v2_trans_sum.py**
+
+A **Whisper → GPT-4o** strict-factual pipeline for processing **Board of Education meeting audio**.
+
+**Features:**
+
+* **Automatic folder discovery** – processes meeting subfolders containing chunked WAV files (`*_part_###.wav`).
+* **Speech-to-text transcription** using [OpenAI Whisper](https://github.com/openai/whisper) (GPU or CPU).
+* **Board member enrichment** – optional lookup from a CSV to prepend meeting attendee names.
+* **Factual-only AI summarisation** – uses GPT-4o-mini to generate:
+
+  * Narrative summary (`[name]_summary.txt|.md`)
+  * Bullet outline (`[name]_outline.txt|.md`)
+  * Structured motions/votes CSV (`[name]_decisions.csv`)
+* **Strict prompts** – prevents hallucinations by ensuring outputs contain **only information from the transcript**.
+* **Markdown and plain-text outputs** for transcripts, summaries, and outlines.
+* **Large transcript handling** – auto-splits long text into chunks for summarisation and re-fuses results.
+* **CLI options** for model selection, recursion, skipping Markdown, or transcript-only mode.
+
+**Usage example:**
+
+```bash
+python transcribe_and_summarise.py /path/to/meeting_root \
+    --csv /path/to/board_members.csv \
+    --model medium \
+    --recursive
+```
+
+**Dependencies:**
+
+```bash
+pip install openai-whisper pandas openai torch tqdm tiktoken
+```
+
+---
+
