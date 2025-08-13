@@ -67,18 +67,6 @@ Combines summaries with compiled attendee lists.
 
 ---
 
-## **Processing Workflow**
-
-```mermaid
-flowchart TD
-    A[Scanned PDFs] --> B[1. pdf_ocr_converter.py / fixed_pdf_ocr.py<br/>OCR Conversion]
-    B --> C[2. pdfocrmove.py<br/>Organize OCR PDFs]
-    C --> D[3. 74summs.py / meeting_minutes_summarizer.py<br/>AI Summarization]
-    D --> E[4. merge_meeting_data.py<br/>Merge with Attendance Data]
-    E --> F[Final Research-Ready Dataset]
-```
-
----
 
 ## **Example Folder Structure**
 
