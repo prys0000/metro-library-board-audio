@@ -1,0 +1,37 @@
+
+---
+
+## **split_audio_chuks.py**
+
+Utility script for splitting large WAV audio files into **smaller, evenly timed chunks** using [FFmpeg](https://ffmpeg.org/).
+
+**Why split audio first?**
+Speech-to-text transcription and summarisation models (like Whisper + GPT) produce **more accurate and detailed results** when working with smaller audio segments, especially for **long meetings or multi-hour recordings**. This helps reduce transcription errors, keep context tight, and avoid missing content at model limits.
+
+**Features:**
+
+* Processes all `.wav` files in the given **source folder**.
+* Splits each file into **configurable chunk sizes** (default: 30 minutes).
+* Saves chunks with an indexed naming pattern:
+
+  ```
+  originalfilename_part_000.wav
+  originalfilename_part_001.wav
+  ...
+  ```
+* Works on **Windows, macOS, and Linux** with FFmpeg installed.
+
+**Usage example:**
+
+```bash
+python split_wav_ffmpeg_template.py
+```
+
+Edit the `SOURCE_FOLDER`, `OUTPUT_FOLDER`, and `CHUNK_SECONDS` variables in the script to match your needs.
+
+**Dependencies:**
+
+* [FFmpeg](https://ffmpeg.org/) (must be installed and available in system PATH)
+
+---
+
