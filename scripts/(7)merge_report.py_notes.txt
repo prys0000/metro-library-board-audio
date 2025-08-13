@@ -1,0 +1,28 @@
+
+---
+
+**(7)merge_report.py**
+Merges AI-generated meeting summaries with compiled attendee lists for archival records.
+
+* **Inputs**:
+
+  * `meeting_summaries.csv` – contains meeting dates, synopsis, summaries, and key notes.
+  * `attendees.csv` – contains meeting dates and detailed attendee information (`Category_1`, `Category_2`, `Name_1`, `Name_2`, `Title/Role`).
+
+* **Process**:
+
+  1. Reads both CSVs using `pandas`.
+  2. Converts `Date` columns to datetime for alignment.
+  3. Groups attendees by date, collapsing them into a single JSON-like list per meeting.
+  4. Merges the attendee lists into the summary dataset on the `Date` field.
+
+* **Output**:
+
+  * A single merged CSV file containing all summaries and corresponding attendees for each meeting.
+
+* **Use case**:
+
+  * Designed for archival projects where meeting records and attendance logs are maintained separately but need to be combined for research or publication.
+
+---
+
