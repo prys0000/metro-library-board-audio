@@ -1,0 +1,64 @@
+---
+
+## **(4)fixed_pdf_ocr.py**
+
+🔍 **Batch OCR processor for scanned PDFs — with Windows fixes and fallbacks**
+
+**What it does**
+This script scans a folder of **PDF documents**, detects which ones are missing searchable text, and runs **OCR (Optical Character Recognition)** to make them fully searchable. It’s designed for **archival, research, and accessibility work** where you have scanned PDFs without embedded text.
+
+**Key features**
+
+* **Multi-method OCR engine** — Uses [OCRmyPDF](https://ocrmypdf.readthedocs.io/) as preferred method, with fallbacks to:
+
+  * **PDF → images → Tesseract OCR → searchable PDF**
+  * Direct PDF text layer injection.
+* **Automatic skip** — Detects and skips already-searchable PDFs to save processing time.
+* **Windows-friendly setup** — Auto-detects common Tesseract installation paths.
+* **Backup & safety** — Optionally saves original PDFs before modification.
+* **Parallel processing** — Speeds up large batch jobs with multi-threading.
+* **Dependency check** — Verifies you have required/recommended libraries before starting.
+* **Fallback image conversion** — Supports `pdf2image`, `PyMuPDF`, or ImageMagick.
+
+**Why it’s important**
+Many archives contain PDFs that are just images — no searchable text. This script fixes that in bulk, enabling fast keyword search and accessibility compliance, even when working on Windows systems with common OCR issues.
+
+**Dependencies**
+Required:
+
+```bash
+pip install pytesseract pillow reportlab PyPDF2
+```
+
+Recommended for best results:
+
+```bash
+pip install ocrmypdf pdf2image PyMuPDF
+```
+
+Also requires **[Tesseract OCR](https://github.com/tesseract-ocr/tesseract)** installed on your system.
+
+**Usage**
+
+```bash
+python fixed_batch_pdf_ocr.py /path/to/folder --method auto --parallel --max-workers 4
+```
+
+Options:
+
+* `--method` → `auto`, `ocrmypdf`, `pdf2images`
+* `--output-suffix` → Append to processed filenames (empty string replaces original)
+* `--no-backup` → Skip backup creation
+* `--parallel` → Enable multi-threaded processing
+* `--max-workers` → Threads to use (default: 2)
+* `--check-deps` → Only check dependencies and exit
+
+**Example output**
+
+```
+Found 42 PDF files to process
+✅ 18 already searchable — skipped
+✅ 22 processed with OCR
+❌ 2 failed
+Processing time: 11m 34s (avg 15.6s/file)
+```
