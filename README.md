@@ -166,7 +166,7 @@ Guidelines:
 - Flag unclear or incomplete text
 ```
 
-## Key Scripts
+## [Key Scripts - click to view scripts and notes](https://github.com/prys0000/metro-library-board-audio/tree/e0f5f22ca948457d63a87c98184626d7751e81db/scripts)
 
 | Script | Purpose |
 |--------|---------|
