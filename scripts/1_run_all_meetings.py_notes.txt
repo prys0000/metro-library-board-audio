@@ -1,0 +1,57 @@
+---
+
+## **1_run\_all\_meetings.py**
+
+📜 **One-shot end-to-end pipeline** for processing an entire folder of Board of Education meeting recordings.
+
+**What it does**
+This script automates the **entire** workflow:
+
+1. **Convert** WAV recordings to MP3 (space-saving, faster processing).
+2. **Transcribe** audio to text using [Whisper](https://github.com/openai/whisper).
+3. **Chunk long transcripts** to avoid token limits (better transcription accuracy & GPT context).
+4. **Summarise each chunk** with GPT-4.
+5. **Merge chunk summaries** into a polished, researcher-friendly final summary.
+6. **Log** processing progress and maintain an `index.csv` with file metadata.
+
+**Why chunking matters**
+Breaking up long transcripts into smaller pieces ensures:
+
+* **Better transcription accuracy** from Whisper.
+* **Higher summary quality** from GPT models.
+* **No token limit issues** with long meetings.
+  This method gives **richer summaries** than processing long audio files in one pass.
+
+**Features**
+
+* **Fully automated batch run** — just point it at your WAV folder.
+* Preserves **historical context** in summaries for researchers & educators.
+* Writes:
+
+  * `*.txt` transcripts
+  * `*.summary.txt` final summaries
+  * `index.csv` with meeting metadata (date, duration, word count)
+* Logs activity in `batch_log.txt`.
+
+**Dependencies**
+
+```bash
+pip install openai whisper pydub python-dotenv tiktoken
+```
+
+Also requires **[FFmpeg](https://ffmpeg.org/)** installed and available in your system `PATH`.
+
+**Usage example**
+
+```bash
+python run_all_meetings_template.py
+```
+
+Edit the **USER CONFIGURATION** section to set:
+
+* Paths for WAV, MP3, transcripts, and summaries.
+* Your `FFMPEG_EXE` location.
+* Path to `.env` file containing `OPENAI_API_KEY`.
+
+---
+
