@@ -1,0 +1,61 @@
+
+---
+
+## **(2)pdf_ocr_converter.py**
+
+📄 **Batch-convert meeting minute images into searchable PDFs with OCR**
+
+**What it does**
+This script processes **folders of scanned meeting minutes** and converts them into **searchable, OCR’d PDF files** for archival access. It supports multiple OCR engines and automatically generates companion text summaries for metadata and indexing purposes.
+
+**Key features**
+
+* **Multi-method OCR support** — Uses [OCRmyPDF](https://ocrmypdf.readthedocs.io/) for best results, with fallbacks to Tesseract OCR or a non-searchable PDF export.
+* **Batch folder processing** — Scans through all meeting folders (skipping `unassigned`) and processes them automatically.
+* **Preserves page order** — Images are sorted before PDF generation to maintain correct sequencing.
+* **Automatic text summaries** — Creates a `.txt` file with meeting metadata, page counts, and source image names.
+* **Multiple image formats** — Handles `.jpg`, `.jpeg`, `.png`, `.tiff`, `.tif`, `.bmp`.
+* **Dependency check** — Can verify required and recommended libraries before running.
+
+**Why it’s important**
+In archival workflows, scanned images of meeting minutes are often just pictures. This script adds **full-text searchability** to PDFs, making it possible for researchers and archivists to quickly locate content.
+
+**Dependencies**
+Required:
+
+```bash
+pip install pillow pytesseract reportlab
+```
+
+Recommended (for best OCR):
+
+```bash
+pip install ocrmypdf pypdf2
+```
+
+Also requires **[Tesseract OCR](https://github.com/tesseract-ocr/tesseract)** installed on your system.
+
+**Usage**
+
+```bash
+python image_to_searchable_pdf.py /path/to/meeting_folders --ocr-method auto
+```
+
+Options:
+
+* `--ocr-method` → `auto` (try all), `ocrmypdf`, `tesseract`, `simple`
+* `--page-size` → `letter` or `a4`
+* `--dpi` → Image processing DPI (default: 300)
+* `--check-deps` → Only check for required/recommended packages and exit
+
+**Example output**
+
+```
+1974-03-10/
+├── 1974-03-10_meeting_minutes.pdf
+├── 1974-03-10_summary.txt
+├── page1.jpg
+├── page2.jpg
+```
+
+---
