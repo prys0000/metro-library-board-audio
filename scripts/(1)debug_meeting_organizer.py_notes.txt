@@ -1,0 +1,58 @@
+---
+
+## **(1)debug\_meeting\_organizer.py**
+
+📜 **OCR-powered image organizer for historical Board of Education meeting minutes**
+
+**What it does**
+This script scans a folder of meeting minutes **images** (JPG, PNG, TIFF, etc.), uses **Tesseract OCR** to read the text, detects the **start pages of new meetings**, and organizes the files into date-based folders. It’s designed for **archival processing** where meeting minutes are scanned as individual images and need to be grouped by session date.
+
+**Key features**
+
+* **Multi-pattern date detection** — Handles a variety of date formats from historical documents (e.g., *"MEETING OF JANUARY 5, 1971"* or *"1/5/1971"*).
+* **Flexible meeting start detection** — Uses keyword indicators plus date recognition to identify when a new meeting begins.
+* **Debug mode for transparency** — Saves OCR output, parsed dates, and detection indicators to a `debug_ocr_output` folder for troubleshooting OCR accuracy.
+* **Automatic folder creation** — Files are copied into folders named by meeting date (`YYYY-MM-DD`). Files without a detected meeting are placed in an `unassigned` folder.
+* **Summary reporting** — Generates an `organization_report.txt` listing all meetings, file counts, and unassigned items.
+
+**Why debug mode matters**
+OCR on historical documents can be tricky—debug mode allows archivists to **see exactly what text is extracted**, making it easier to adjust scanning settings or regex patterns for better accuracy.
+
+**Dependencies**
+
+```bash
+pip install pytesseract pillow
+```
+
+Also requires **[Tesseract OCR](https://github.com/tesseract-ocr/tesseract)** installed on your system.
+
+* For Windows, update `tesseract_path` in `setup_tesseract_path()` to your install location.
+* On macOS/Linux, ensure `tesseract` is in your system `PATH`.
+
+**Usage**
+
+```bash
+python debug_meeting_minutes_organizer.py /path/to/source_images /path/to/output_folder --debug
+```
+
+Options:
+
+* `--max-files N` → Limit files for testing.
+* `--no-debug` → Disable debug output.
+
+**Example output structure**
+
+```
+output_folder/
+├── 1971-01-05/
+│   ├── page1.jpg
+│   ├── page2.jpg
+├── 1971-02-10/
+│   ├── page1.jpg
+├── unassigned/
+│   ├── misc_page.jpg
+└── debug_ocr_output/
+    ├── page1_debug.txt
+    ├── page2_debug.txt
+```
+
