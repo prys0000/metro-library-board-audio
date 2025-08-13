@@ -1,4 +1,4 @@
-# split_wav_ffmpeg_template.py
+# split_audio_chunks.py
 import os
 import subprocess
 from pathlib import Path
