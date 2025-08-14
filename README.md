@@ -25,7 +25,7 @@ This repository contains tools and processes for preserving historical audio rec
 original_wavs → convert to mp3 → transcription → summaries
 ```
 
-### Enhanced Audio Processing Workflow (`run_all_meetings.py`)
+### Enhanced Audio Processing Workflow (`enhanced_run_all_meetings.py`)
 
 This comprehensive workflow ensures high-quality digitization and processing:
 
